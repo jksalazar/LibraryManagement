@@ -86,4 +86,16 @@ defmodule Library do
   def delete_user(users, user_id) do
     Enum.filter(users, &(&1.id != user_id))
   end
+
+  def search_books_by_title(library, title) do
+    Enum.filter(library, fn book -> String.contains?(String.downcase(book.title), String.downcase(title)) end)
+  end
+
+  def search_books_by_author(library, author) do
+    Enum.filter(library, fn book -> String.contains?(String.downcase(book.author), String.downcase(author)) end)
+  end
+
+  def list_borrowed_books(library) do
+    Enum.filter(library, &(&1.available == false))
+  end
 end
